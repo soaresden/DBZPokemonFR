@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>DBZ Team Training en français · patcher</title>
+<meta name="description" content="Fabrique la version française de Dragon Ball Z Team Training V8 à partir de tes propres ROMs, directement dans ton navigateur.">
+<meta name="color-scheme" content="dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1530; --panel: #16214a; --panel-2: #1e2c5e; --line: rgba(255,255,255,.12);
+    --ink: #f3f5ff; --muted: #a8b2d8; --orange: #ff8a1f; --yellow: #ffd23f; --ok: #3ddc84; --bad: #ff5d6c;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0; color: var(--ink); font: 400 15px/1.45 "Nunito", system-ui, sans-serif;
+    background: radial-gradient(circle at 50% -20%, #2b3f8f 0, var(--bg) 60%) fixed, var(--bg);
+    display: flex; justify-content: center;
+  }
+  main { width: min(760px, 100%); min-height: 100dvh; padding: 20px 16px 16px; display: flex; flex-direction: column; gap: 14px; }
+  header { text-align: center; }
+  h1 { margin: 0; font: 400 clamp(2rem, 7vw, 3.1rem)/1 "Bangers", sans-serif; letter-spacing: .04em; color: var(--yellow); text-shadow: 3px 3px 0 #c2410c; }
+  h1 small { display: block; font-size: .5em; color: var(--orange); text-shadow: none; letter-spacing: .08em; }
+  .lead { margin: 8px auto 0; max-width: 56ch; color: var(--muted); }
+  .lead strong { color: var(--ink); }
+
+  .slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .slot {
+    border: 2px dashed var(--line); border-radius: 14px; background: var(--panel); padding: 12px;
+    display: flex; flex-direction: column; gap: 4px; min-height: 104px; cursor: pointer; transition: border-color .15s, background .15s;
+  }
+  .slot:hover, .drop .slot { border-color: var(--orange); }
+  .slot .t { font-weight: 900; }
+  .slot .d { font-size: .8rem; color: var(--muted); }
+  .slot .s { margin-top: auto; font-size: .8rem; font-weight: 700; color: var(--muted); overflow-wrap: anywhere; }
+  .slot.ok { border-style: solid; border-color: var(--ok); background: #143a3a; }
+  .slot.ok .s { color: var(--ok); }
+  .slot.bad { border-style: solid; border-color: var(--bad); }
+  .slot.bad .s { color: var(--bad); }
+  .hint { margin: 0; text-align: center; font-size: .82rem; color: var(--muted); }
+
+  button.go {
+    border: 0; border-radius: 999px; padding: 14px 22px; cursor: pointer;
+    font: 400 1.5rem/1 "Bangers", sans-serif; letter-spacing: .06em; color: #1b1203;
+    background: linear-gradient(180deg, var(--yellow), var(--orange)); box-shadow: 0 4px 0 #b45309;
+  }
+  button.go:disabled { filter: grayscale(1) brightness(.6); cursor: not-allowed; box-shadow: none; }
+
+  .progress { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; display: grid; gap: 8px; }
+  .bar { height: 10px; border-radius: 999px; background: var(--panel-2); overflow: hidden; }
+  .bar span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--orange), var(--yellow)); transition: width .3s; }
+  .ptext { font-weight: 700; }
+  .pnote { font-size: .8rem; color: var(--muted); }
+  .result { background: #143a3a; border: 2px solid var(--ok); border-radius: 14px; padding: 14px; display: grid; gap: 10px; text-align: center; }
+  .result .btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .result a { padding: 10px 16px; border-radius: 999px; font-weight: 900; text-decoration: none; color: #062b16; background: var(--ok); }
+  .result a.alt { background: transparent; color: var(--ink); border: 1px solid var(--line); font-weight: 700; }
+  .error { background: #3a1420; border: 2px solid var(--bad); border-radius: 14px; padding: 12px 14px; font-size: .9rem; }
+  .error p { margin: 4px 0 6px; }
+  .error summary { cursor: pointer; color: var(--muted); font-size: .8rem; }
+  .error pre { white-space: pre-wrap; font-size: .72rem; max-height: 22dvh; overflow: auto; color: var(--muted); }
+  footer { margin-top: auto; text-align: center; font-size: .75rem; color: var(--muted); }
+  footer a { color: var(--muted); }
+  [hidden] { display: none !important; }
+  input[type=file] { display: none; }
+
+  /* Mobile : tout doit tenir sans défiler, même avec la progression affichée */
+  @media (max-width: 560px) {
+    main { gap: 10px; padding-top: 14px; }
+    h1 { font-size: 1.75rem; }
+    .lead { font-size: .85rem; margin-top: 6px; }
+    .slots { grid-template-columns: 1fr; gap: 8px; }
+    .slot { min-height: 0; padding: 9px 12px; flex-direction: row; align-items: baseline; justify-content: space-between; gap: 8px; }
+    .slot .d, .hint, .pnote { display: none; }
+    .slot .s { margin-top: 0; text-align: right; }
+    button.go { font-size: 1.25rem; padding: 12px 18px; }
+  }
+</style>
+</head>
+<body>
+<main id="app">
+  <header>
+    <h1>Dragon Ball Z Team Training<small>en français</small></h1>
+    <p class="lead">Dépose <strong>tes propres fichiers</strong> : la page fabrique la ROM française ici, dans ton navigateur.
+      Rien n'est envoyé sur internet.</p>
+  </header>
+
+  <section class="slots" id="slots">
+    <label class="slot" data-k="us"><span class="t">① FireRed US</span><span class="d">Pokémon FireRed USA v1.0 (.gba)</span><span class="s">à déposer</span></label>
+    <label class="slot" data-k="fr"><span class="t">② Rouge Feu FR</span><span class="d">Pokémon Rouge Feu France (.gba) : source des textes officiels</span><span class="s">à déposer</span></label>
+    <label class="slot" data-k="hack"><span class="t">③ Hack anglais</span><span class="d">DBZ Team Training V8 de Z-Max : le patch .ips ou la ROM déjà patchée</span><span class="s">à déposer</span></label>
+  </section>
+  <input type="file" id="picker" multiple accept=".gba,.ips,.GBA,.IPS">
+  <p class="hint">Glisse les fichiers n'importe où sur la page, ou touche une case. L'ordre n'a pas d'importance : chaque fichier est reconnu tout seul.</p>
+
+  <button class="go" id="go" type="button" disabled>Créer ma ROM en français</button>
+
+  <section class="progress" id="progress" hidden>
+    <div class="bar"><span id="barFill"></span></div>
+    <div class="ptext" id="ptext">Préparation…</div>
+    <div class="pnote">Le navigateur télécharge d'abord Python (une dizaine de Mo), puis tout se fait sur ton appareil : compte environ 2 minutes sur un ordinateur, plus sur un téléphone. Garde la page ouverte.</div>
+  </section>
+
+  <section class="result" id="result" hidden>
+    <strong>C'est prêt ! 🐉</strong>
+    <div class="btns">
+      <a id="dlRom" download="DBZ Team Training V8 (FR).gba">Télécharger la ROM française</a>
+      <a id="dlIps" class="alt" download="DBZ-Team-Training-V8-FR.ips">Le patch .ips (à appliquer sur FireRed US)</a>
+    </div>
+  </section>
+
+  <div class="error" id="error" hidden></div>
+
+  <footer>
+    Hack <em>Dragon Ball Z Team Training</em> : Z-Max · Traduction française : <a href="https://github.com/soaresden/DBZPokemonFR" target="_blank" rel="noreferrer">soaresden</a> ·
+    Projet de fan, sans lien avec Nintendo, The Pokémon Company ni Toei. Utilise uniquement des jeux que tu possèdes.
+  </footer>
+</main>
+
+<script>
+const VERSION = 1;          // à monter quand tools/ ou data/ changent (cache du navigateur)
+const files = { us: null, fr: null, hack: null };
+const $ = (s) => document.querySelector(s);
+const slot = (k) => document.querySelector(`.slot[data-k="${k}"]`);
+
+function setSlot(k, ok, text) {
+  const el = slot(k);
+  el.classList.toggle("ok", ok); el.classList.toggle("bad", !ok);
+  el.querySelector(".s").textContent = text;
+}
+
+// Reconnaît un fichier à son contenu (code du jeu à 0xAC pour une ROM GBA, en-tête PATCH pour un IPS).
+async function identify(file) {
+  const head = new Uint8Array(await file.slice(0, 0xC0).arrayBuffer());
+  const ascii = (a, b) => String.fromCharCode(...head.slice(a, b));
+  if (ascii(0, 5) === "PATCH") return { k: "hack", kind: "ips" };
+  if (head.length < 0xC0) return null;
+  const code = ascii(0xAC, 0xB0), version = head[0xBC];
+  if (code === "BPRE") return version === 0 ? { k: "us" } : { k: "us", error: "c'est FireRed US v1.1 : il faut la v1.0" };
+  if (code === "BPRF") return { k: "fr" };
+  if (code === "ZBDM") return { k: "hack", kind: "rom" };
+  if (code.startsWith("BPR")) return { error: `FireRed d'une autre région (code ${code}) : il faut la version USA ou France` };
+  return { error: `ce n'est pas un des fichiers attendus (code ${code.replace(/[^\x20-\x7e]/g, "?")})` };
+}
+
+async function addFiles(list) {
+  for (const f of list) {
+    const id = await identify(f);
+    if (!id) { alert(`${f.name} : fichier trop petit, ce n'est pas une ROM.`); continue; }
+    if (!id.k) { alert(`${f.name} : ${id.error}.`); continue; }
+    if (id.error) { files[id.k] = null; setSlot(id.k, false, `${f.name} : ${id.error}`); continue; }
+    if (id.k === "hack" && id.kind === "rom" && f.size !== 16777216) { setSlot("hack", false, `${f.name} : taille inattendue`); continue; }
+    files[id.k] = { file: f, kind: id.kind };
+    setSlot(id.k, true, `✓ ${f.name}`);
+  }
+  $("#go").disabled = !(files.us && files.fr && files.hack);
+}
+
+$("#picker").addEventListener("change", (e) => addFiles(e.target.files));
+document.querySelectorAll(".slot").forEach((el) => el.addEventListener("click", (e) => { e.preventDefault(); $("#picker").click(); }));
+addEventListener("dragover", (e) => { e.preventDefault(); $("#app").classList.add("drop"); });
+addEventListener("dragleave", (e) => { if (!e.relatedTarget) $("#app").classList.remove("drop"); });
+addEventListener("drop", (e) => { e.preventDefault(); $("#app").classList.remove("drop"); addFiles(e.dataTransfer.files); });
+
+$("#go").addEventListener("click", async () => {
+  $("#go").disabled = true; $("#error").hidden = true; $("#result").hidden = true; $("#progress").hidden = false;
+  const payload = {
+    us: await files.us.file.arrayBuffer(),
+    fr: await files.fr.file.arrayBuffer(),
+    [files.hack.kind === "ips" ? "hackIps" : "hackRom"]: await files.hack.file.arrayBuffer()
+  };
+  const worker = new Worker(`patcher.worker.js?v=${VERSION}`);
+  worker.onmessage = ({ data: m }) => {
+    if (m.type === "status") $("#ptext").textContent = m.text;
+    if (m.type === "step") {
+      $("#ptext").textContent = `Étape ${m.index + 1}/${m.total} · ${m.text}…`;
+      $("#barFill").style.width = `${Math.round((m.index / m.total) * 100)}%`;
+    }
+    if (m.type === "done") {
+      $("#barFill").style.width = "100%"; $("#ptext").textContent = "Terminé.";
+      $("#dlRom").href = URL.createObjectURL(new Blob([m.rom], { type: "application/octet-stream" }));
+      $("#dlIps").href = URL.createObjectURL(new Blob([m.ips], { type: "application/octet-stream" }));
+      $("#result").hidden = false; worker.terminate(); $("#go").disabled = false;
+    }
+    if (m.type === "error") {
+      // Une phrase lisible (dernière erreur Python), le détail technique replié en dessous.
+      const lines = m.text.trim().split("\n");
+      const last = [...lines].reverse().find((l) => /^\w*Error: /.test(l)) || lines[lines.length - 1];
+      const step = $("#ptext").textContent.replace(/…$/, "");
+      $("#error").innerHTML = "";
+      $("#error").append(
+        Object.assign(document.createElement("strong"), { textContent: `Ça n'a pas marché (${step}).` }),
+        Object.assign(document.createElement("p"), { textContent: last.replace(/^\w*Error: /, "") }),
+        Object.assign(document.createElement("details"), { innerHTML: "<summary>Détail technique</summary>" })
+      );
+      $("#error details").append(Object.assign(document.createElement("pre"), { textContent: m.text }));
+      $("#error").hidden = false; worker.terminate(); $("#go").disabled = false;
+    }
+  };
+  worker.onerror = (e) => { $("#error").textContent = `Erreur : ${e.message}`; $("#error").hidden = false; $("#go").disabled = false; };
+  const base = location.href.replace(/[^/]*([?#].*)?$/, "");
+  worker.postMessage({ files: payload, base, version: VERSION }, Object.values(payload));
+});
+</script>
+</body>
+</html>

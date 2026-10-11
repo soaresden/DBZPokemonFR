@@ -1,0 +1,4 @@
+numpy            # alignement US/FR (obligatoire)
+pillow           # captures des tests (optionnel)
+mgba             # émulateur headless pour tests/smoke.py (optionnel, Linux/WSL)
+capstone         # désassembleur THUMB pour analyser le code du jeu (optionnel)

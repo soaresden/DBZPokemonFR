@@ -1,0 +1,136 @@
+{
+"0x180817": {
+"text": "A maternal POKéMON that raises its\\nyoung in a pouch on its belly.",
+"end": 1575001,
+"refs": [
+15331052
+],
+"fr": "Ce POKéMON élève son petit dans sa\\npoche ventrale."
+},
+"0x180c75": {
+"text": "Turtle Hermit!",
+"end": 1576068,
+"refs": [
+4562680
+],
+"fr": "Le Vieil Ermite des Tortues!"
+},
+"0x18211e": {
+"text": "KANTO!",
+"end": 1581349,
+"refs": [
+11606040
+],
+"fr": "KANTO!"
+},
+"0x191008": {
+"text": "Machine, contains a\\ntechnique for fighters.\\pUsing a TM teaches the move it\\ncontains to a fighter.\\pA TM is good for only one use.\\pSo, when you use one, pick the\\nfighter carefully.\\pAnyways…\\nTM02 contains ENERGY PUNCH.\\pIt's a powerful punch charged\\nwith ki.",
+"end": 1642759,
+"refs": [
+5254348
+],
+"fr": "Technique, contient une technique\\npour combattants.\\pUtiliser une CT apprend la\\ntechnique qu'elle contient à un\\lcombattant.\\pUne CT ne sert qu'une seule fois.\\pAlors, quand tu en utilises une,\\nchoisis bien le combattant.\\pBref…\\nLa CT02 contient POING ENERG.\\pC'est un coup de poing puissant\\nchargé de Ki."
+},
+"0x192c32": {
+"text": "What an incredible piece of news!\\pI haven't seen a news story this\\nincredible in too long a time!\\pThanks for sharing this fantastic\\nnews. Have a bunch of BERRIES!",
+"end": 1649877,
+"refs": [
+5058092
+],
+"fr": "Incroyable, pour des nouvelles,\\nça c'est des nouvelles!\\pJ'avais pas entendu quelque\\nchose comme ça depuis des lustres!\\pTiens, prends ces BAIES en\\nremerciement!"
+},
+"0x1a1e16": {
+"text": "Thanks to you, my dream came\\ntrue…",
+"end": 1711673,
+"refs": [
+5220816
+],
+"fr": "Merci, mes rêves se sont enfin\\nréalisés…"
+},
+"0x1b221e": {
+"text": "That's it, I have to give you this.",
+"end": 1778242,
+"refs": [
+4588879
+],
+"fr": "Tiens, c'est pour toi!"
+},
+"0x1bcc00": {
+"text": "No fighter holding the [FD 02]\\nBERRY may enter the UNION ROOM.",
+"end": 1821754,
+"refs": [
+1817428
+],
+"fr": "Aucun combattant tenant la BAIE\\n[FD 02] ne peut entrer dans la\\lSALLE UNION."
+},
+"0x1c1d31": {
+"text": "I've been hiking for too long…",
+"end": 1842512,
+"refs": [
+4901636
+],
+"fr": "J'devrais vraiment me reposer…"
+},
+"0x1c405f": {
+"text": "I'm practicing in secret\\nagain.",
+"end": 1851519,
+"refs": [
+11597088
+],
+"fr": "Je m'entraîne toujours\\nen secret."
+},
+"0x454238": {
+"text": "A small desk built\\nfor one.",
+"end": 4538964,
+"refs": [
+4544272,
+4544304
+],
+"fr": "Un petit bureau\\npour une personne."
+},
+"0x80001a": {
+"text": "You can store items and even\\npeople in the capsules of DR.BRIEF.",
+"end": 8388699,
+"refs": [
+1486192,
+1486288,
+1486973,
+1507159,
+1515820
+],
+"fr": "On peut stocker des objets et\\nmême des gens dans les capsules\\ldu DR. BRIEF!"
+},
+"0x8000c6": {
+"text": "BRIEF: It's unsafe! Fighters\\nwander around this area! You need\\la fighter to be safe overthere.\\lCome with me!",
+"end": 8388915,
+"refs": [
+1463901
+],
+"fr": "BRIEF: C'est dangereux! Des\\ncombattants rôdent dans le coin!\\lIl te faut un combattant pour\\lêtre en sécurité là-bas.\\lViens avec moi!"
+},
+"0x80016e": {
+"text": "Fighters around the world wait for\\nbeing trained by you, [FD 01]!",
+"end": 8389035,
+"refs": [
+1481328
+],
+"fr": "Les combattants du monde entier\\nattendent d'être entraînés par\\ltoi, [FD 01]!"
+},
+"0x80050c": {
+"text": "The Grand Elder Guru is near the\\ngreen pond over there.\\pHe can awaken the true power of\\nsome fighters by raising their\\lIVs to 31.\\pBut some fighters already\\nhave high IVs, the awakeking is\\lnot very efficient in this case.\\pDo you want to know who can be\\nawakened?",
+"end": 8390162,
+"refs": [
+1476433,
+7771743
+],
+"fr": "Le Doyen Guru se trouve près de\\nl'étang vert, là-bas.\\pIl peut éveiller la vraie\\npuissance de certains combattants\\len montant leurs IV à 31.\\pMais si un combattant a déjà\\ndes IV élevés, l'éveil n'est\\lpas très efficace.\\pVeux-tu savoir qui peut\\nêtre éveillé?"
+},
+"0x800516": {
+"text": "Elder Guru is near the\\ngreen pond over there.\\pHe can awaken the true power of\\nsome fighters by raising their\\lIVs to 31.\\pBut some fighters already\\nhave high IVs, the awakeking is\\lnot very efficient in this case.\\pDo you want to know who can be\\nawakened?",
+"end": 8390162,
+"refs": [
+1854660
+],
+"fr": "Doyen Guru se trouve près de\\nl'étang vert, là-bas.\\pIl peut éveiller la vraie\\npuissance de certains combattants\\len montant leurs IV à 31.\\pMais si un combattant a déjà\\ndes IV élevés, l'éveil n'est\\lpas très efficace.\\pVeux-tu savoir qui peut\\nêtre éveillé?"
+}
+}

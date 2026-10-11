@@ -1,0 +1,16 @@
+# ROMs et patchs tiers (jamais dans le dépôt)
+roms/*.gba
+roms/*.ips
+roms/*.sav
+# extractions de texte des ROMs, régénérées par build.py
+data/derived/
+# sorties de tests
+tests/out/
+__pycache__/
+*.pyc
+# instantanés mémoire du jeu (graphismes/textes en RAM) : locaux uniquement
+tests/states/
+# le patch généré contient les textes de la VF officielle tirés de roms/fr.gba : ne pas publier
+patch/*.ips
+# archive de transfert (contient le patch et des états de test)
+*.zip
